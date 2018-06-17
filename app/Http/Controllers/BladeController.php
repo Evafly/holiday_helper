@@ -141,9 +141,7 @@ class BladeController extends Controller
     public function trains()
     {
         $data = array();
-        $xml = XmlParser::load('xml/20180616.xml');
-        $infos = $xml->getContent();
-
+        $xml = XmlParser::load('xml/trains_20180616.xml');
         $infos = $xml->getContent();
         $infos_data = array();
         $i = 0;
@@ -248,5 +246,31 @@ class BladeController extends Controller
     public function weather()
     {
         return View('weather');
+    }
+    public function Forecast36()
+    {
+        // $keyword = $_GET['keyword'];
+        $data = array();
+
+        
+            $xml = XmlParser::load('xml/forecast_36hr.xml');
+            $infos = $xml->getContent();
+            // dd($infos);
+            $infos_data = array();
+            $i = 0;
+            $data['datasetTitle'] = (string)$infos->dataset->datasetInfo->datasetDescription;
+            // foreach($infos as $info) {
+            //     if ((string)$info['dataid']!="") {
+            //         $infos_data[$i]['datasetTitle'] = (string)$info['datasetDescription'];
+            //         // $infos_data[$i]['title'] = (string)$info['title'];
+            //         // $infos_data[$i]['imageUrl'] = (string)$info['imageUrl'];
+            //         // $infos_data[$i]['cityName'] = (string)$info['cityName'];
+
+            //         $i++;
+            //     }
+            // }
+        $data['infos'] = $infos_data;
+        
+        return View::make('/36hr_forecast',['data' => $data]);
     }
 }

@@ -18,3 +18,4 @@ Route::get('/exhibition_detail', 'BladeController@exhibitionDetail');
 Route::get('/transport', 'BladeController@transport');
 Route::get('/trains', 'BladeController@trains');
 Route::get('/weather', 'BladeController@weather');
+Route::get('/36hr_forecast', 'BladeController@Forecast36');
