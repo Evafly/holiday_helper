@@ -1,0 +1,15 @@
+main[role="main-home-wrapper"] article[role="pge-title-content"] header h2 span{
+    color:#53a5fb;
+}
+figure.effect-oscar{
+    background-color:#53a5fb;
+}
+section.blog-content figure .post-date{
+    background-color:#53a5fb;
+}
+main[role="main-inner-wrapper"] article[role="pge-title-content"] header h2 span{
+    color:#53a5fb;
+}
+section.blog-content:hover article{
+    background-color: #53a5fb;
+}
