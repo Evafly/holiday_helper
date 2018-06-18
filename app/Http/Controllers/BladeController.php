@@ -249,7 +249,6 @@ class BladeController extends Controller
     }
     public function Forecast36()
     {
-        // $keyword = $_GET['keyword'];
         $data = array();
 
         
@@ -257,20 +256,26 @@ class BladeController extends Controller
             $infos = $xml->getContent();
             // dd($infos);
             $infos_data = array();
+            $infos_weather_data = array();
             $i = 0;
+            $j = 0;
             $data['datasetTitle'] = (string)$infos->dataset->datasetInfo->datasetDescription;
-            // foreach($infos as $info) {
-            //     if ((string)$info['dataid']!="") {
-            //         $infos_data[$i]['datasetTitle'] = (string)$info['datasetDescription'];
-            //         // $infos_data[$i]['title'] = (string)$info['title'];
-            //         // $infos_data[$i]['imageUrl'] = (string)$info['imageUrl'];
-            //         // $infos_data[$i]['cityName'] = (string)$info['cityName'];
-
-            //         $i++;
-            //     }
-            // }
-        $data['infos'] = $infos_data;
+            $data['issueTime'] = (string)$infos->dataset->datasetInfo->issueTime;
+            $data['updateTime'] = (string)$infos->dataset->datasetInfo->update;
+            foreach($infos->dataset->location as $info) {
+                if ((string)$info->locationName !="") {
+                    $infos_data[$i]['location'] = (string)$info->locationName;
+                    foreach($infos->dataset->location->weatherElement as $info2) {
+                        // if ((string)$info->dataset->location->locationName !="") {
+                            $infos_data[$i]['wx'][$j] = (string)$info2->time->parameter->parameterName;
+                            $j++;
+                        // }
+                    }
+                    $i++;
+                }
+            }
+            $data['infos'] = $infos_data;
         
-        return View::make('/36hr_forecast',['data' => $data]);
+        return View::make('/forecast36',['data' => $data]);
     }
 }

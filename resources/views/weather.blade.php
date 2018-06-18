@@ -42,7 +42,7 @@
 
 							<p>Weather Forecast</p>
 
-							<a href="/36hr_forecast">View more</a>
+							<a href="/forecast36">View more</a>
 
                         </figcaption>
 
