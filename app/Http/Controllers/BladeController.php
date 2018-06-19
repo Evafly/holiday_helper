@@ -259,23 +259,28 @@ class BladeController extends Controller
             $infos_weather_data = array();
             $i = 0;
             $j = 0;
+            $k = 0;
             $data['datasetTitle'] = (string)$infos->dataset->datasetInfo->datasetDescription;
             $data['issueTime'] = (string)$infos->dataset->datasetInfo->issueTime;
             $data['updateTime'] = (string)$infos->dataset->datasetInfo->update;
             foreach($infos->dataset->location as $info) {
                 if ((string)$info->locationName !="") {
+                    // dd($info);
                     $infos_data[$i]['location'] = (string)$info->locationName;
-                    foreach($infos->dataset->location->weatherElement as $info2) {
-                        // if ((string)$info->dataset->location->locationName !="") {
-                            $infos_data[$i]['wx'][$j] = (string)$info2->time->parameter->parameterName;
-                            $j++;
-                        // }
+                    foreach($info->weatherElement as $info2) {
+                        foreach($info2->time as $info3){
+                            $infos_data[$i]['wx'][$j]['weather'][$k] = (string)$info3->parameter->parameterName;
+                            $k++;
+                        }
+                        $j++;
+                        $k=0;
                     }
                     $i++;
+                    $j=0;
                 }
             }
             $data['infos'] = $infos_data;
-        
+        // dd($infos_data);
         return View::make('/forecast36',['data' => $data]);
     }
 }

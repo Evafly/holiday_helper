@@ -23,20 +23,20 @@
                 <table class="table table-bordered">
                     <thead>
                         <th>縣市名稱</th>
-                        <th>天氣狀況</th>
-                        <th>最高溫</th>
-                        <th>最低溫</th>
-                        <th>舒適度</th>
-                        <th>降雨機率</th>
+                        <th colspan="3">天氣狀況</th>
+                        <th colspan="3">最高溫</th>
+                        <th colspan="3">最低溫</th>
+                        <th colspan="3">舒適度</th>
+                        <th colspan="3">降雨機率(%)</th>
                     </thead>
                     @foreach($data['infos'] as $index => $info)
                     <tr>
                         <td>{{$info['location']}}</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
+                        @foreach ($info['wx'] as $wx)
+                            @foreach($wx['weather'] as $weather)
+                                <td>{{ $weather }}</td>
+                            @endforeach
+                        @endforeach
                     </tr>
                     @endforeach
                 </table>
