@@ -141,6 +141,7 @@ class BladeController extends Controller
     public function trains()
     {
         $data = array();
+        $index = $_GET['STA'];
         $xml = XmlParser::load('xml/trains_20180616.xml');
         $infos = $xml->getContent();
         // $station_data = file('json/stations.json');
@@ -261,6 +262,7 @@ class BladeController extends Controller
         }
         // dd($infos_data);
         $data['infos'] = $infos_data;
+        $data['stationData'] = $station_data;
         return View::make('trains',['data' => $data]);
     }
 

@@ -6,16 +6,19 @@
 
         <main role="main-inner-wrapper" class="container">
                 <!-- work details -->
-
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            請選擇站名
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @foreach($data['stationData'] as $index => $info)
+                                <li><a href="trains?STA={{ $info['id'] }}">{{ $info['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 	<div class="work-details">
                         <div class="work-images grid">
-
-                            <!-- <ul class="grid-lod effect-2" id="grid">
-
-                                @foreach($data['infos'] as $index => $info)
-                                <li>{{ $info['train'] }}&nbsp;</li>
-                                @endforeach
-                            </ul> -->
                             <table class="table table-bordered">
                                 <thead>
                                     <tr style="background-color:#f0ad4e;color:#ffffff">
@@ -32,12 +35,12 @@
                                     <td style="border:1px solid #eea236">{{ $info['train'] }}</td>
                                     <td style="border:1px solid #eea236">
                                         @foreach($info['traininfo'] as $info2)
-                                            {{ $info2 }}<br>
+                                            <p>{{ $info2 }}</p>
                                         @endforeach
                                     </td>
                                     <td style="border:1px solid #eea236">
                                         @foreach($info['arrtime'] as $info3)
-                                            {{ $info3 }}<br>
+                                            <p>{{ $info3 }}</p>
                                         @endforeach
                                     </td>
                                     <td style="border:1px solid #eea236">{{ $info['carclass'] }}</td>
