@@ -4,3 +4,6 @@ main[role="main-home-wrapper"] article[role="pge-title-content"] header h2 span{
 figure.effect-oscar{
     background-color:#53fb71;
 }
+tbody tr:hover{
+    background-color: #dff0d8;
+}

@@ -143,8 +143,14 @@ class BladeController extends Controller
         $data = array();
         $xml = XmlParser::load('xml/trains_20180616.xml');
         $infos = $xml->getContent();
+        // $station_data = file('json/stations.json');
+        $station_data = json_decode(file_get_contents('json/stations.json'),true);
+        // dd($station_data);
+
         $infos_data = array();
         $i = 0;
+        $j = 0;
+        $k = 0;
         foreach($infos as $info) {
             if ((string)$info['Train'] != "") {
                 $infos_data[$i]['train'] = (string)$info['Train'];
@@ -235,10 +241,25 @@ class BladeController extends Controller
                 }else{
                     $infos_data[$i]['line'] = "海線";
                 }
-                
+                foreach($info->TimeInfo as $info2){
+                        $infos_data[$i]['arrtime'][$j] = substr((string)$info2['ARRTime'],0,-3);
+                    foreach ($station_data as $stationDT) {
+                        if((string)$station_data[$k]['id'] === (string)$info2['Station']){
+                            $infos_data[$i]['traininfo'][$j] = (string)$stationDT['name'];
+                        }
+                        // dd($station_data[$k]['id']);
+                        $k++;
+                        // dd($info2['Station']);
+                    }
+                    $k = 0;
+                    $j++;
+                    // dd($stationDT);
+                }
+                $j = 0;
                 $i++;
             }
         }
+        // dd($infos_data);
         $data['infos'] = $infos_data;
         return View::make('trains',['data' => $data]);
     }

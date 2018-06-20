@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<link href="css/weather.css" rel="stylesheet" type="text/css">
 <main role="main-inner-wrapper" class="container">
 
         	
@@ -22,23 +23,27 @@
 
                 <table class="table table-bordered">
                     <thead>
-                        <th>縣市名稱</th>
-                        <th colspan="3">天氣狀況</th>
-                        <th colspan="3">最高溫</th>
-                        <th colspan="3">最低溫</th>
-                        <th colspan="3">舒適度</th>
-                        <th colspan="3">降雨機率(%)</th>
-                    </thead>
-                    @foreach($data['infos'] as $index => $info)
-                    <tr>
-                        <td>{{$info['location']}}</td>
-                        @foreach ($info['wx'] as $wx)
-                            @foreach($wx['weather'] as $weather)
-                                <td>{{ $weather }}</td>
-                            @endforeach
-                        @endforeach
+                    <tr style="background-color:#5cb85c;color:#ffffff">
+                        <th style="border:1px solid #347934">縣市名稱</th>
+                        <th style="border:1px solid #347934" colspan="3">天氣狀況</th>
+                        <th style="border:1px solid #347934" colspan="3">最高溫</th>
+                        <th style="border:1px solid #347934" colspan="3">最低溫</th>
+                        <th style="border:1px solid #347934" colspan="3">舒適度</th>
+                        <th style="border:1px solid #347934" colspan="3">降雨機率(%)</th>
                     </tr>
-                    @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach($data['infos'] as $index => $info)
+                        <tr>
+                            <td style="border:1px solid #4cae4c">{{$info['location']}}</td>
+                            @foreach ($info['wx'] as $wx)
+                                @foreach($wx['weather'] as $weather)
+                                    <td style="border:1px solid #4cae4c">{{ $weather }}</td>
+                                @endforeach
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
 
             </div>
