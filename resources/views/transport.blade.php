@@ -34,7 +34,7 @@
 
                 	<figure class="effect-oscar">
 
-                    	<img src="images/home-images/art_origin.jpg" alt="" class="img-responsive"/>
+                    	<img src="images/home-images/train_origin.jpg" alt="" class="img-responsive"/>
 
                         <figcaption>
 
