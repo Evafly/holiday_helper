@@ -40,7 +40,48 @@ class BladeController extends Controller
                     $infos_data[$i]['uid'] = (string)$info['UID'];
                     $infos_data[$i]['title'] = (string)$info['title'];
                     $infos_data[$i]['imageUrl'] = (string)$info['imageUrl'];
-                    // $infos_data[$i]['cityName'] = (string)$info['cityName'];
+                    $infos_data[$i]['startY'] = substr((string)$info['startDate'],0,-6);
+                    switch(substr((string)$info['startDate'],5,-3)){
+                        case '01':
+                            $infos_data[$i]['startM'] = 'January';
+                        break;
+                        case '02':
+                            $infos_data[$i]['startM'] = 'Feburary';
+                        break;
+                        case '03':
+                            $infos_data[$i]['startM'] = 'March';
+                        break;
+                        case '04':
+                            $infos_data[$i]['startM'] = 'April';
+                        break;
+                        case '05':
+                            $infos_data[$i]['startM'] = 'May';
+                        break;
+                        case '06':
+                            $infos_data[$i]['startM'] = 'June';
+                        break;
+                        case '07':
+                            $infos_data[$i]['startM'] = 'July';
+                        break;
+                        case '08':
+                            $infos_data[$i]['startM'] = 'August';
+                        break;
+                        case '09':
+                            $infos_data[$i]['startM'] = 'September';
+                        break;
+                        case '10':
+                            $infos_data[$i]['startM'] = 'October';
+                        break;
+                        case '11':
+                            $infos_data[$i]['startM'] = 'November';
+                        break;
+                        case '12':
+                            $infos_data[$i]['startM'] = 'December';
+                        break;
+
+                    }
+                    $infos_data[$i]['startD'] = substr((string)$info['startDate'],-2);
+
 
                     $i++;
                 }
@@ -61,14 +102,53 @@ class BladeController extends Controller
                     $infos_data[$i]['uid'] = (string)$info['UID'];
                     $infos_data[$i]['title'] = (string)$info['title'];
                     $infos_data[$i]['imageUrl'] = (string)$info['imageUrl'];
-                    // $infos_data[$i]['cityName'] = (string)$info['cityName'];
+                    $infos_data[$i]['startY'] = substr((string)$info['startDate'],0,-6);
+                    switch(substr((string)$info['startDate'],5,-3)){
+                        case '01':
+                            $infos_data[$i]['startM'] = 'January';
+                        break;
+                        case '02':
+                            $infos_data[$i]['startM'] = 'Feburary';
+                        break;
+                        case '03':
+                            $infos_data[$i]['startM'] = 'March';
+                        break;
+                        case '04':
+                            $infos_data[$i]['startM'] = 'April';
+                        break;
+                        case '05':
+                            $infos_data[$i]['startM'] = 'May';
+                        break;
+                        case '06':
+                            $infos_data[$i]['startM'] = 'June';
+                        break;
+                        case '07':
+                            $infos_data[$i]['startM'] = 'July';
+                        break;
+                        case '08':
+                            $infos_data[$i]['startM'] = 'August';
+                        break;
+                        case '09':
+                            $infos_data[$i]['startM'] = 'September';
+                        break;
+                        case '10':
+                            $infos_data[$i]['startM'] = 'October';
+                        break;
+                        case '11':
+                            $infos_data[$i]['startM'] = 'November';
+                        break;
+                        case '12':
+                            $infos_data[$i]['startM'] = 'December';
+                        break;
+
+                    }
+                    $infos_data[$i]['startD'] = substr((string)$info['startDate'],-2);
 
                     $i++;
                 }
             }
 
          }
-        
         $data['infos'] = $infos_data;
         
         return View::make('exhibition',['data' => $data]);
@@ -141,7 +221,10 @@ class BladeController extends Controller
     public function trains()
     {
         $data = array();
-        $index = $_GET['STA'];
+        // $sta = "";
+        // if (isset($_GET['STA'])) {
+            // $sta = $_GET['STA'];
+        // }
         $xml = XmlParser::load('xml/trains_20180616.xml');
         $infos = $xml->getContent();
         // $station_data = file('json/stations.json');
@@ -149,10 +232,22 @@ class BladeController extends Controller
         // dd($station_data);
 
         $infos_data = array();
+        $infos_trains_data = array();
         $i = 0;
         $j = 0;
         $k = 0;
+        $x = 0;
+        // foreach($infos as $infoT){
+        //     if($sta === (string)$infos->TimeInfo['Station']){
+        //         $infos_trains_data[$x]['staNum'] = (string)$infoT['Train'];
+        //     }
+        //     $x++;
+        // }
+        // dd($sta);
         foreach($infos as $info) {
+            // if($sta === (string)$info2['Station']){
+            //     $infos_trains_data[$j]['staNum'] = (string)$info['Train'];
+            // }
             if ((string)$info['Train'] != "") {
                 $infos_data[$i]['train'] = (string)$info['Train'];
                 $infos_data[$i]['carclass'] = (string)$info['CarClass'];
@@ -254,7 +349,7 @@ class BladeController extends Controller
                     }
                     $k = 0;
                     $j++;
-                    // dd($stationDT);
+                    // dd($infos_trains_data);
                 }
                 $j = 0;
                 $i++;
@@ -272,9 +367,11 @@ class BladeController extends Controller
     }
     public function Forecast36()
     {
-        $data = array();
-
-        
+            $loca = "";
+            if (isset($_GET['loca'])) {
+                $loca = $_GET['loca'];
+            }
+            $data = array();
             $xml = XmlParser::load('xml/forecast_36hr.xml');
             $infos = $xml->getContent();
             // dd($infos);
@@ -283,26 +380,52 @@ class BladeController extends Controller
             $i = 0;
             $j = 0;
             $k = 0;
+            $x = 0;
             $data['datasetTitle'] = (string)$infos->dataset->datasetInfo->datasetDescription;
             $data['issueTime'] = (string)$infos->dataset->datasetInfo->issueTime;
             $data['updateTime'] = (string)$infos->dataset->datasetInfo->update;
-            foreach($infos->dataset->location as $info) {
-                if ((string)$info->locationName !="") {
-                    // dd($info);
-                    $infos_data[$i]['location'] = (string)$info->locationName;
-                    foreach($info->weatherElement as $info2) {
-                        foreach($info2->time as $info3){
-                            $infos_data[$i]['wx'][$j]['weather'][$k] = (string)$info3->parameter->parameterName;
-                            $k++;
+            foreach($infos->dataset->location as $infoW){
+                if((string)$infoW->locationName != ""){
+                    $infos_weather_data[$x]['location'] = (string)$infoW->locationName;
+                }
+                $x++;
+            }
+            if($loca != ""){
+                foreach($infos->dataset->location as $info) {
+                    if ((string)$info->locationName !="" && preg_match('/'.$loca.'/i',(string)$info->locationName)) {
+                        // dd($info);
+                        $infos_data[$i]['location'] = (string)$info->locationName;
+                        foreach($info->weatherElement as $info2) {
+                            foreach($info2->time as $info3){
+                                $infos_data[$i]['wx'][$j]['weather'][$k] = (string)$info3->parameter->parameterName;
+                                $k++;
+                            }
+                            $j++;
+                            $k=0;
                         }
-                        $j++;
-                        $k=0;
+                        $i++;
+                        $j=0;
                     }
-                    $i++;
-                    $j=0;
+                }
+            }else{
+                foreach($infos->dataset->location as $info) {
+                    if ((string)$info->locationName !="") {
+                        $infos_data[$i]['location'] = (string)$info->locationName;
+                        foreach($info->weatherElement as $info2) {
+                            foreach($info2->time as $info3){
+                                $infos_data[$i]['wx'][$j]['weather'][$k] = (string)$info3->parameter->parameterName;
+                                $k++;
+                            }
+                            $j++;
+                            $k=0;
+                        }
+                        $i++;
+                        $j=0;
+                    }
                 }
             }
             $data['infos'] = $infos_data;
+            $data['infos2'] = $infos_weather_data;
         // dd($infos_data);
         return View::make('/forecast36',['data' => $data]);
     }

@@ -18,19 +18,47 @@
                 <p><label>更新時間：</label>{{ $data['updateTime'] }}</p>
 
             </header>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    請選擇縣市
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="forecast36">所有城市</a></li>
+                    @foreach($data['infos2'] as $index => $info)
+                        <li><a href="forecast36?loca={{ $info['location'] }}">{{ $info['location'] }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
 
             <div class="enter-content">
-
                 <table class="table table-bordered">
                     <thead>
-                    <tr style="background-color:#5cb85c;color:#ffffff">
-                        <th style="border:1px solid #347934">縣市名稱</th>
-                        <th style="border:1px solid #347934" colspan="3">天氣狀況</th>
-                        <th style="border:1px solid #347934" colspan="3">最高溫</th>
-                        <th style="border:1px solid #347934" colspan="3">最低溫</th>
-                        <th style="border:1px solid #347934" colspan="3">舒適度</th>
-                        <th style="border:1px solid #347934" colspan="3">降雨機率(%)</th>
-                    </tr>
+                        <tr style="background-color:#5cb85c;color:#ffffff">
+                            <th rowspan="2" style="border:1px solid #347934">縣市名稱</th>
+                            <th style="border:1px solid #347934" colspan="3">天氣狀況</th>
+                            <th style="border:1px solid #347934" colspan="3">最高溫</th>
+                            <th style="border:1px solid #347934" colspan="3">最低溫</th>
+                            <th style="border:1px solid #347934" colspan="3">舒適度</th>
+                            <th style="border:1px solid #347934" colspan="3">降雨機率(%)</th>
+                        </tr>
+                        <tr style="background-color:#5cb85c;color:#ffffff">
+                            <th style="border:1px solid #347934">今天白天</th>
+                            <th style="border:1px solid #347934">今天晚上至明天清晨</th>
+                            <th style="border:1px solid #347934">明天白天</th>
+                            <th style="border:1px solid #347934">今天白天</th>
+                            <th style="border:1px solid #347934">今天晚上至明天清晨</th>
+                            <th style="border:1px solid #347934">明天白天</th>
+                            <th style="border:1px solid #347934">今天白天</th>
+                            <th style="border:1px solid #347934">今天晚上至明天清晨</th>
+                            <th style="border:1px solid #347934">明天白天</th>
+                            <th style="border:1px solid #347934">今天白天</th>
+                            <th style="border:1px solid #347934">今天晚上至明天清晨</th>
+                            <th style="border:1px solid #347934">明天白天</th>
+                            <th style="border:1px solid #347934">今天白天</th>
+                            <th style="border:1px solid #347934">今天晚上至明天清晨</th>
+                            <th style="border:1px solid #347934">明天白天</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($data['infos'] as $index => $info)

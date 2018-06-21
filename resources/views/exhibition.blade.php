@@ -40,7 +40,7 @@
 
                                         <div class="post-date">
 
-                                            <span>24</span> July 2016
+                                            <span>{{ $info['startD']}}</span>{{ $info['startM'] }}&nbsp;{{ $info['startY'] }}
 
                                         </div>
 
@@ -82,7 +82,7 @@
 
                                         <div class="post-date">
 
-                                            <span>24</span> July 2016
+                                            <span>{{ $info['startD'] }}</span>{{ $info['startM'] }}&nbsp;{{ $info['startY'] }}
 
                                         </div>
 
